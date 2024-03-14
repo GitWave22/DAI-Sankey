@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1">
+<title>SankeyMATIC: Build a Sankey Diagram</title>
+<link rel="stylesheet" href="build.css">
+<link rel="stylesheet" href="hideIt.css">
+<link rel="stylesheet" href="spon.css">
+<script defer src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/canvg@3/lib/umd.js" crossorigin="anonymous"></script>
+<script defer src="constants.js"></script>
+<script defer src="sankey.js"></script>
+<script defer src="lz-string.min.js"></script>
+<script defer src="sankeymatic.js"></script>
+<meta name="description" content="Make beautiful Sankey diagrams. Export them as images or SVG with this free data visualization tool." />
+<meta property="og:title" content="SankeyMATIC: Build a Sankey Diagram" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://sankeymatic.com/build/" />
+<meta property="og:description" content="Make beautiful flow diagrams. Export them as images or SVG." />
+<meta property="og:site_name" content="SankeyMATIC.com" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:image" content="https://sankeymatic.com/build/i/2024-01-04-card-image.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="2700" />
+<meta property="og:image:height" content="1350" />
+<meta property="og:image:alt" content="Screenshot of the SankeyMATIC diagram-building interface" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@SankeyMATIC" />
+<meta name="twitter:creator" content="@nowthis" />
+</head>
+<body>
+<div class='sponsor resizeSankey'>
+    <div class='sponsor-text'>Sponsors:
+      <div class='sponsor-info'>i</div>
+      <div class='sponsor-info-text'>Contact sponsor @ gardenofthings.com</div>
+    </div>
+    <div class='spon-contain'>
+      <div class='first'>
+        <div class='badge'>1st</div>
+      </div>
+      <div class='second'>
+        <div class='badge'>2nd</div>
+      </div>
+      <div class='third'>
+        <div class='badge'>3rd+</div>
+        <div class='sponsor-text'>200 x 144px</div>
+      </div>
+    </div>
+    <div class='disclaimer'>Disclaimer: Sponsors are websites and entities that help fund this site operation. While we strive to filter out any potential scams from our list of sponsors, we cannot fully eliminate the associated risks. We strongly advise all users to exercise caution when visiting external sites linked from our website. Please note that we do not assume any responsibility for content hosted on external sites. Furthermore, we will not be held liable for any damages or losses incurred as a result of visiting these external sites. Our listing of sponsors should not be construed as an endorsement of any kind, nor does it constitute an offer of any form of investment or securities. Investing in cryptocurrencies carries a high level of risk, and there is a possibility that you may lose all the money that you invest. Cryptocurrencies are not regulated, and as such, you will not have any regulatory protection for any losses incurred. We strongly recommend that all users conduct their own research and seek professional advice if necessary before making any investment decisions. By using this website, you agree to this disclaimer and assume all risks related to the use of this website and any of its content. If you do not agree with these terms, please refrain from using our website. Please note that this disclaimer is subject to change without notice, and it is the responsibility of the user to regularly check for any updates. This disclaimer does not limit or exclude any rights you may have under applicable law. If any part of this disclaimer is deemed unenforceable under applicable law, the remaining parts will continue in full force and effect. This disclaimer is governed by and construed in accordance with the laws of the jurisdiction in which our company is registered. Any disputes relating to this disclaimer will be subject to the exclusive jurisdiction of the courts of that jurisdiction.</div>
+  </div> 
+  <script src="spon.js"></script>
+<div class='page-title-cont'><h1>ETH Supply Break Down V3 (Last data pull: 08 March)</h1></div>
+<div id="tooltip" class="tooltip" style="position: absolute"></div>
+<header class="header vs f-middle">
+  <nav class="header__nav hs-sm-vs space-between">
+  <a href="/" title="SankeyMATIC home page" class="header__logo hs f-middle align-center"><img alt="SankeyMATIC logo" src="i/SKM-trsp-300.png" height="27" width="27" class="skm_logo_small" />&nbsp;SankeyMATIC</a>
+  <ul class="header__links hs f-middle">
+    <li><a href="/news/" title="What's New with SankeyMATIC">News</a></li>
+    <li><a href="/gallery/" title="Gallery of SankeyMATIC Examples">Gallery</a></li>
+    <li><a href="/manual/" title="How to use SankeyMATIC to the fullest">Manual</a></li>
+    <li><a href="/about/" title="About SankeyMATIC and how to support the site">About</a></li>
+  </ul>
+  </nav>
+</header>
+<div class="callout-container pad-small">If you find SankeyMATIC useful, please consider <a href="../about/" class="internal-link" title="(new window) About SankeyMATIC and how to support the site" target="_blank">donating to support further development</a>. Thanks!</div>
+
+<main>
+<div id="example_diagrams" class="text_center">
+<h4>Sample Diagrams &amp; Starting Points:
+<button type="button" id="load_example_simple" onclick="replaceGraph('simple_start'); return false;">Start Simple</button>
+<button type="button" id="load_example_financial_results" onclick="replaceGraph('financial_results'); return false;">Financial Results</button>
+<button type="button" id="load_example_job_search" onclick="replaceGraph('job_search'); return false;">Job Search</button>
+<button type="button" id="load_example_election" onclick="replaceGraph('election'); return false;">Ranked Election</button>
+<!-- <button type="button" id="load_example_energy_all" onclick="replaceGraph('energy_flows_all'); return false;">Energy Flows</button> &nbsp; -->
+<button type="button" id="load_example_basic_budget" onclick="replaceGraph('default_budget'); return false;">Budget (Default)</button>
+</h4>
+
+<p id="replace_graph_warning" style="display: none;">
+<em>This will <strong>erase</strong> your changes. Are you sure?</em><br />
+<input type="hidden" id="demo_graph_chosen" value="" />
+<button type="button" id="replace_graph_yes" onclick="replaceGraphConfirmed(); return false;">Yes, replace the diagram</button>
+<button type="button" id="replace_graph_no" onclick="hideReplaceGraphWarning(); return false;">Cancel</button>
+</p>
+</div>
+
+<div class="center_basic">
+<form id="skm_form" onsubmit="process_sankey(); return false;">
+
+<table><tr><td>
+
+<table class="center_basic">
+<tr>
+    <td id="other_entry">
+
+<h2 class="ui_head" onclick="togglePanel('input_options');">
+<span id="input_options_indicator" class="indicator">&ndash;</span>
+Inputs<span id="input_options_hint">:</span></h2>
+
+<div id="input_options" class="text_center grid_sidebar_right">
+<div>
+    <textarea id="flows_in" title="Diagram Inputs" rows="19" cols="40" class="font_sans" onchange="process_sankey();" onkeyup="debounced_process_sankey();">// Enter Flows between Nodes, like this:
+//         Source [AMOUNT] Target
+
+Genesis\nWallets\n(Original) [72009990.5] Ethereum
+Mining\nRewards [50363875.7] Ethereum
+Staking\nRewards [1865696.7] Ethereum
+L2 [1584612.0] Arbitrum
+L2 [373044.3] Optimism
+L2 [179200.5] Base
+L2 [175497.3] Zksync2
+L2 [82765.9] Linea
+L2 [48944.1] Blast
+L2 [46712.2] Starknet
+L2 [44005.0] Mantle
+L2 [31805.3] Mantapacific
+L2 [25712.8] Scroll
+L2 [23719.9] Mode
+L2 [21283.7] Zksync
+L2 [12922.7] Nova
+L2 [69076.0] Small\nL2
+Total\nSupply [2719301.7] L2
+wETH [2440.8] L2\nwETH
+Total\nSupply [31786530.5] Staked
+Staked [8254972.8] CEXs
+Staked [12163520.2] Liquid\nStaking
+Staked [376327.4] Solo\nStakers
+Staked [5018785.1] Staking\nPools
+Staked [5972925.0] Unidentified
+Liquid\nStaking [9832764.0] Lido
+Liquid\nStaking [830524.9] Rocket\nPool
+Liquid\nStaking [512142.0] ether.fi
+Liquid\nStaking [244928.0] Swell
+Liquid\nStaking [220352.0] Frax\nFinance
+Liquid\nStaking [132502.0] Stader
+Liquid\nStaking [125630.8] Diva\n(Pre-launch)
+Liquid\nStaking [74496.0] Stakewise
+Liquid\nStaking [66368.0] Liquid\nCollective
+Liquid\nStaking [37504.0] StakeHound
+Liquid\nStaking [22408.5] Stkr\n(Ankr)
+Liquid\nStaking [63900.0] Small\nLiquid\nStaking
+CEXs [4431905.4] Coinbase
+CEXs [1239232.4] Binance
+CEXs [774464.9] Kraken
+CEXs [529493.7] Bitcoin\nSuisse
+CEXs [421409.1] OKX
+CEXs [369184.0] Upbit
+CEXs [137664.0] CoinSpot
+CEXs [59872.0] XHash
+CEXs [52672.0] Bitstamp
+CEXs [44032.0] Revolut
+CEXs [41536.1] Gate.io
+CEXs [31072.0] Poloniex
+CEXs [26464.0] KuCoin
+CEXs [24994.9] Bitfinex
+CEXs [70976.2] Small\nCEXs
+Staking\nPools [1085344.0] Kiln
+Staking\nPools [1013312.0] Figment
+Staking\nPools [619676.3] Staked.us
+Staking\nPools [535424.0] Mantle\n(mETH)
+Staking\nPools [407328.4] stakefish
+Staking\nPools [326112.0] DARMA\nCapital
+Staking\nPools [295840.0] P2P.org
+Staking\nPools [266880.2] Blockdaemon
+Staking\nPools [100352.0] Octant
+Staking\nPools [76000.0] Consensys
+Staking\nPools [66464.0] RockX
+Staking\nPools [61219.4] MyEtherWallet
+Staking\nPools [60736.0] imToken
+Staking\nPools [39744.0] Everstake
+Staking\nPools [64352.9] Small\nStaking\nPools
+Solo\nStakers [151648.0] Daniel\nWang
+Solo\nStakers [15840.0] conurtrol.eth
+Solo\nStakers [8544.0] bitshameddesk.eth
+Solo\nStakers [8000.0] honoraryape.eth
+Solo\nStakers [7712.0] was.eth
+Solo\nStakers [6976.0] Vitalik\nButerin
+Solo\nStakers [5056.0] for.eth
+Solo\nStakers [4608.0] Nimbus\nTeam
+Solo\nStakers [4608.0] Sigma\nPrime\nTeam
+Solo\nStakers [4608.0] Prysm\nTeam
+Solo\nStakers [4608.0] Teku\nTeam
+Solo\nStakers [4576.0] guccilorian.eth
+Solo\nStakers [149543.4] Other\nSolo\nStakers
+Total\nSupply [11463194.5] CEX
+CEX [3312828.7] Binance
+CEX [1683101.0] Bitfinex
+CEX [1638096.9] Kraken
+CEX [1559808.7] Robinhood
+CEX [447370.1] Gemini
+CEX [339020.9] Paxos
+CEX [321622.9] Deribit
+CEX [309631.7] Crypto.com
+CEX [211985.5] Bybit
+CEX [166591.3] Coinbase
+CEX [163464.5] OKX
+CEX [154038.9] Bithumb
+CEX [114939.0] Iconomi
+CEX [107751.8] KuCoin
+CEX [84786.6] Bitbank
+CEX [80648.3] Gate.io
+CEX [68787.5] BTC\nMarkets
+CEX [54053.8] SwissBorg
+CEX [53594.0] Korbit
+CEX [52642.1] BtcTurk
+CEX [39956.8] Revolut
+CEX [38306.4] Coinhako
+CEX [28963.8] bitFlyer
+CEX [27204.0] Stake.com
+CEX [26041.1] Bitstamp
+CEX [377958.2] CEX\nSmall
+L2\nwETH [7.8] Zksync2
+L2\nwETH [112.0] Zksync
+L2\nwETH [2321.1] Small\nL2
+Lido [92740.9] Arbitrum
+Lido [34564.4] Optimism
+Lido [4934.8] Base
+Lido [5.4] Zksync2
+Lido [2173.0] Linea
+Lido [1017.8] Starknet
+Lido [1.5] Mantle
+Lido [169.2] Mantapacific
+Lido [190.8] Zksync
+Lido [1489.8] Small\nL2
+Lido [951689.4] Liquid\nRestaking
+Rocket\nPool [16501.9] Arbitrum
+Rocket\nPool [6721.7] Optimism
+Rocket\nPool [1085.6] Base
+Rocket\nPool [703.3] Zksync2
+Rocket\nPool [67.9] Starknet
+Rocket\nPool [5.8] Mantapacific
+Rocket\nPool [21.6] Scroll
+Rocket\nPool [48.8] Zksync
+Rocket\nPool [667.3] Small\nL2
+Rocket\nPool [64272.3] Liquid\nRestaking
+Total\nSupply [2287004.0] Genesis\nWallets\n(Current)
+Total\nSupply [3056636.4] wETH
+Total\nSupply [919255.2] Lost\nEth
+Lost\nEth [85476.2] Buggy\nContract
+Lost\nEth [28537.9] Burn\nAddress
+Lost\nEth [250000.0] Lost\nKeys
+Lost\nEth [515034.6] Parity\nWallet
+Lost\nEth [40206.5] Typo
+wETH [654.3] Lost\nWeth
+Ethereum [4130394.9] Total\nBurned
+Ethereum [120109168.0] Total\nSupply
+Total\nBurned [53509.5] cex
+Total\nBurned [1337881.4] defi
+Total\nBurned [23009.3] gaming
+Total\nBurned [18039.3] L1\nbridge
+Total\nBurned [178896.4] l2
+Total\nBurned [38735.8] meme
+Total\nBurned [101695.5] mev
+Total\nBurned [1173110.2] nft
+Total\nBurned [33533.0] woof
+Total\nBurned [19154.7] Small\nBurn
+Total\nBurned [1152829.8] Other\nBurn
+Total\nSupply [5852000] DeFi\nStale
+Swell [199033.7] Liquid\nRestaking
+Mantle\n(mETH) [191790.2] Liquid\nRestaking
+Stader [103683.0] Liquid\nRestaking
+Binance [85427.4] Liquid\nRestaking
+Coinbase [31002.3] Liquid\nRestaking
+Frax\nFinance [25921.3] Liquid\nRestaking
+Unidentified [20815.6] Liquid\nRestaking
+Stakewise [18449.5] Liquid\nRestaking
+Liquid\nCollective [9876.4] Liquid\nRestaking
+Stkr\n(Ankr) [1359.1] Liquid\nRestaking
+Liquid\nRestaking [1703320.3] EigenLayer
+EigenPod [1271950.0] EigenLayer
+Unidentified [550944.0] EigenPod
+Binance [27296.0] EigenPod
+Small\nStaking\nPools [1152.0] EigenPod
+Figment [3232.0] EigenPod
+Kiln [10176.0] EigenPod
+Small\nCEXs [2208.0] EigenPod
+P2P.org [40640.0] EigenPod
+RockX [44672.0] EigenPod
+Staked.us [29952.0] EigenPod
+XHash [5024.0] EigenPod
+ether.fi [515150.0] EigenPod
+stakefish [41504.0] EigenPod</textarea>
+</div>
+
+<div class="separated_stack">
+
+<div class="top_center_self"><button id="preview_graph" type="submit">Show &gt;</button></div>
+
+<div class="bottom_center_self">
+<button id="save_my_work_button" type="submit" class="loadsave_button"
+ onclick="saveDiagramToFile(); return false;"
+ title="Save the current diagram and settings to a local text file">Save my<br />work <strong>↘</strong></button>
+
+<p>
+<input type="file" id="load_diagram_from_file"
+  accept=".txt,.text,.skm,text/plain"
+  class="hidden_under"
+  onchange="loadDiagramFile(); return null;" />
+<label id="load_diagram_button" for="load_diagram_from_file" role="button"
+ class="label_as_button loadsave_button"
+ title="Load a diagram definition from a text file"><strong>↖</strong> Load<br />from file</label></p>
+
+</div>
+</div>
+
+
+<p class="form_elements3 grid_entire_row">
+<strong>Arrange the diagram:</strong><br />
+<span><input name="layout_order" id="layout_order_automatic" value="automatic" type="radio" onchange="process_sankey();" checked="checked" /><label for="layout_order_automatic" class="ropt">Automatically</label></span>
+<span><input name="layout_order" id="layout_order_exact" value="exact" type="radio" onchange="process_sankey();" class="spaced_checkbox" /><label for="layout_order_exact" class="ropt">Using the exact input order</label></span>
+</p>
+</div>
+
+<!-- LABELS -->
+
+<datalist id="tick100"><option value="100"></option></datalist>
+<datalist id="tick400"><option value="400"></option></datalist>
+<datalist id="tick-align">
+<option value="-1">Before</option>
+<option value="0">Centered</option>
+<option value="1">After</option>
+</datalist>
+<datalist id="tick-stages">
+<option value="2"></option><option value="3"></option>
+<option value="4"></option><option value="5"></option>
+<option value="6"></option><option value="7"></option>
+<option value="8"></option><option value="9"></option>
+<option value="10"></option><option value="11"></option>
+<option value="12"></option><option value="13"></option>
+<option value="14"></option><option value="15"></option>
+</datalist>
+
+<h2 class="ui_head" onclick="togglePanel('label_options');">
+<span id="label_options_indicator" class="indicator">+</span>
+Labels<span id="label_options_hint">...</span></h2>
+
+<div id="label_options" class="form_chunk" style="display: none;">
+
+<div class="vs b-pad indented">
+
+<div class="hs align-baseline gap-medium">
+<span><input type="checkbox" id="labelname_appears" value="1" onchange="process_sankey();" checked="checked">
+<label for="labelname_appears" class="ropt">Show <strong>Names</strong></label></span>
+
+<span class="no_wrap" onmouseover="revealVal('labelname_weight');" onmouseout="fadeVal('labelname_weight');"><label for="labelname_weight" class="sr-only">Style for Node Names</label>
+<span class="smalllabel font_light">Light</span><span class="output_container"><input id="labelname_weight" class="slider_xsmall" type="range" min="100" max="700" step="300" value="700" list="tick400" onfocus="revealVal('labelname_weight');" onblur="fadeVal('labelname_weight');" oninput="updateOutput('labelname_weight'); process_sankey();" onchange="process_sankey();"><output id="labelname_weight_val" for="labelname_weight" class="fade-init output_6">-</output></span><span class="smalllabel font_bolder">Bold</span></span>
+</div>
+
+<div class="hs align-baseline gap-medium">
+<span><input type="checkbox" id="labelvalue_appears" value="1" onchange="process_sankey();" class="spaced_checkbox">
+<label for="labelvalue_appears" class="ropt">Show <strong>Values</strong></label></span>
+
+<span class="no_wrap" onmouseover="revealVal('labelvalue_weight');" onmouseout="fadeVal('labelvalue_weight');"><label for="labelvalue_weight" class="sr-only">Style for Node Values</label>
+<span class="smalllabel font_light">Light</span><span class="output_container"><input id="labelvalue_weight" class="slider_xsmall" type="range" min="100" max="700" step="300" value="400" list="tick400" onfocus="revealVal('labelvalue_weight');" onblur="fadeVal('labelvalue_weight');" oninput="updateOutput('labelvalue_weight'); process_sankey();" onchange="process_sankey();"><output id="labelvalue_weight_val" for="labelvalue_weight" class="fade-init output_6">-</output></span><span class="smalllabel font_bolder">Bold</span></span>
+</div>
+</div>
+
+<div class="hs gap-medium indented align-baseline b-pad">
+<span>
+<strong>Font:</strong>
+<span class="no_wrap"><input name="labels_fontface" type="radio" id="sans_serif" value="sans-serif" checked="checked" onchange="process_sankey();" /><label for="sans_serif" class="ropt font_sans">sans</label></span>
+<span class="no_wrap"><input name="labels_fontface" type="radio" id="serif" value="serif" onchange="process_sankey();" /><label for="serif" class="ropt font_serif">serif</label></span>
+<span class="no_wrap"><input name="labels_fontface" type="radio" id="monospace" value="monospace" onchange="process_sankey();" /><label for="monospace" class="ropt font_mono">mono</label></span>
+</span>
+<span><label for="labels_color"><strong>Color:</strong></label> <input type="color" id="labels_color" size="7" maxlength="7" value="#B8B8B8" onchange="process_sankey();"></span>
+</div>
+
+<details open><summary><strong>Sizes</strong></summary>
+<div class="vs gap-small align-center">
+<div class="hs align-center justify-center gap-large b-divider">
+<div class="vs align-center">
+<label for="labelname_size"><strong>Base Size:</strong></label>
+<input id="labelname_size" type="number" class="wholenumber number_10s" min="6" step="1" value="16" onchange="process_sankey();"></div>
+
+<div class="vs align-center text_center" onmouseover="revealVal('labels_relativesize');" onmouseout="fadeVal('labels_relativesize');">
+<label for="labels_relativesize" title="Set relative size of Names and Values">Magnify:</label>
+<div class="hs align-center gap-small no_wrap">
+    <div class="align-center"><strong>Names</strong></div>
+    <span class="output_container"><input id="labels_relativesize" class="slider_small" type="range" min="50" max="150" value="100" list="tick100" onfocus="revealVal('labels_relativesize');" onblur="fadeVal('labels_relativesize');" oninput="updateOutput('labels_relativesize'); process_sankey();" onchange="process_sankey();"><output id="labels_relativesize_val" for="labels_relativesize" class="fade-init output_12">-</output></span>
+    <div class="align-center"><strong>Values</strong></div>
+</div>
+</div>
+</div>
+
+<div class="vs align-center justify-center text_center b-divider" onmouseover="revealVal('labels_magnify');" onmouseout="fadeVal('labels_magnify');">
+    <label for="labels_magnify">Show larger labels for:</label>
+    <div class="hs justify-center gap-small no_wrap">
+        <div class="align-center"><strong>Small</strong><br />Amounts</div>
+        <span class="output_container"><input id="labels_magnify" class="slider_medium" type="range" min="50" max="150" value="150" list="tick100" onfocus="revealVal('labels_magnify');" onblur="fadeVal('labels_magnify');" oninput="updateOutput('labels_magnify'); process_sankey();" onchange="process_sankey();"><output id="labels_magnify_val" for="labels_magnify" class="fade-init output_12">-</output></span>
+        <div class="align-center"><strong>Large</strong><br />Amounts</div>
+    </div>
+</div>
+
+<div class="hs gap-small" onmouseover="revealVal('labels_linespacing');" onmouseout="fadeVal('labels_linespacing');">
+<label for="labels_linespacing" id="spacing_fld_label"><strong>Line Spacing:</strong></label>
+<span class="nowrap">
+<span class="smalllabel">Min</span>
+<span class="output_container"><input id="labels_linespacing" class="slider_medium" type="range" min="0.0" max="1.0" step="0.05" value="0.2" onfocus="revealVal('labels_linespacing');" onblur="fadeVal('labels_linespacing');" oninput="updateOutput('labels_linespacing'); process_sankey();" onchange="process_sankey();"><output id="labels_linespacing_val" for="labels_linespacing" class="fade-init output_3">-</output></span>
+<span class="smalllabel">Max</span>
+</span>
+</div>
+<div class="text_center">Add line breaks inside labels using <code>\n</code></div>
+</div>
+</details><!-- End Sizes -->
+
+<details><summary><strong>Placement</strong></summary>
+<div>
+<div class="vs align-center">
+<div class="vs gap-small">
+<fieldset class="simple">
+<span class="no_wrap"><input name="labelposition_scheme" type="radio" id="label_scheme_auto" value="auto" onchange="process_sankey();" checked="checked" /><label for="label_scheme_auto" class="ropt"><strong>Automatic</strong></label></span>
+<div class="hs align-center justify-center gap-small l-pad">
+<div class="indented l-pad" style="max-width: 20em;">
+When a Node has an <strong>empty side</strong>, place its label there.
+
+<div class="vs align-center justify-center text_center" onmouseover="revealVal('labelposition_autoalign');" onmouseout="fadeVal('labelposition_autoalign');">
+<label for="labelposition_autoalign" style="line-height: 2;">When neither side is empty, place labels:</label>
+<div class="hs align-center justify-center gap-small">
+<div class="align-center no_wrap"><strong>Before</strong><br />the Node</div>
+<span class="output_container"><input id="labelposition_autoalign" class="slider_medium" type="range" min="-1" max="1" step="1" value="0" onfocus="revealVal('labelposition_autoalign');" onblur="fadeVal('labelposition_autoalign');" oninput="updateOutput('labelposition_autoalign'); checkRadio('label_scheme_auto'); process_sankey();" onchange="checkRadio('label_scheme_auto'); process_sankey();" list="tick-align"><output id="labelposition_autoalign_val" for="labelposition_autoalign" class="fade-init output_6">-</output></span>
+<div class="align-center no_wrap"><strong>After</strong><br />the Node</div>
+</div>
+</div>
+
+</div>
+</div>
+</fieldset>
+<fieldset class="simple">
+<span class="no_wrap"><input name="labelposition_scheme" type="radio" id="label_scheme_perstage" value="per_stage" onchange="process_sankey();" /><label for="label_scheme_perstage" class="ropt"><strong>Per Stage</strong></label></span>
+
+<div class="hs align-center justify-center gap-small t-pad b-divider">
+<span class="text_right">Place labels for<br /> the <strong>first stage</strong>:</span>
+<div class="vs">
+<span class="no_wrap"><input name="labelposition_first" type="radio" id="label_first_before" value="before" onchange="checkRadio('label_scheme_perstage'); process_sankey();" checked="checked" /><label for="label_first_before" class="ropt">Before the Nodes</label></span>
+
+<span class="no_wrap"><input name="labelposition_first" type="radio" id="label_first_after" value="after" onchange="checkRadio('label_scheme_perstage'); process_sankey();" /><label for="label_first_after" class="ropt">After the Nodes</label></span>
+</div>
+</div>
+
+<div class="vs align-center justify-center text_center" onmouseover="revealVal('labelposition_breakpoint');" onmouseout="fadeVal('labelposition_breakpoint');">
+<label for="labelposition_breakpoint" style="line-height: 2;">Place labels on the <strong>opposite side</strong> starting at:</label>
+<div class="hs align-center justify-center gap-small">
+<span class="no_wrap">Stage <strong>2</strong></span><span class="output_container"><input id="labelposition_breakpoint" class="slider_medium" type="range" min="2" max="4" step="1" value="4" onfocus="revealVal('labelposition_breakpoint');" onblur="fadeVal('labelposition_breakpoint');" oninput="updateOutput('labelposition_breakpoint'); checkRadio('label_scheme_perstage'); process_sankey();" onchange="checkRadio('label_scheme_perstage'); process_sankey();" list="tick-stages"><output id="labelposition_breakpoint_val" for="labelposition_breakpoint" class="fade-init output_12">-</output></span><span>(Never)</span>
+</div>
+</div>
+</fieldset>
+</div>
+</div>
+</div>
+</details> <!-- End Placement -->
+
+<details><summary><strong>Arrange Names &amp; Values</strong></summary>
+<div class="vs justify-center align-center gap-small">
+<div class="hs justify-center align-center gap-small b-pad">
+
+<div class="hs align-center gap-small">
+<div class="vs gap-small">
+<div class="hs align-center">
+<input name="labelvalue_position" type="radio" id="labelvalue_after" value="after" onchange="process_sankey();" checked="checked" /><label for="labelvalue_after" class="ropt rrect arr-option">Examples:&nbsp;100</label>
+</div>
+<div class="hs align-center">
+<input name="labelvalue_position" type="radio" id="labelvalue_below" value="below" onchange="process_sankey();" /><label for="labelvalue_below" class="ropt rrect arr-option">Examples<br />100</label>
+</div>
+</div>
+<div class="vs gap-small">
+<div class="hs align-center">
+<input name="labelvalue_position" type="radio" id="labelvalue_before" value="before" onchange="process_sankey();" /><label for="labelvalue_before" class="ropt rrect arr-option">100&nbsp;Examples</label>
+</div>
+<div class="hs align-center">
+<input name="labelvalue_position" type="radio" id="labelvalue_above" value="above" onchange="process_sankey();" /><label for="labelvalue_above" class="ropt rrect arr-option">100<br />Examples</label>
+</div>
+</div>
+</div>
+</div>
+
+<div class="hs gap-medium space-around align-center bg-darker pad-medium" onmouseover="revealVal('labels_highlight');" onmouseout="fadeVal('labels_highlight');">
+<label for="labels_highlight" class="highlight_fld_label"><strong>Highlights:</strong></label>
+<div><span class="smalllabel">0</span><span class="output_container"><input id="labels_highlight" class="slider_small" type="range" min="0" max="0.9" step="0.05" value="0.75" onfocus="revealVal('labels_highlight');" onblur="fadeVal('labels_highlight');" oninput="updateOutput('labels_highlight'); process_sankey();" onchange="process_sankey();"><output id="labels_highlight_val" for="labels_highlight" class="fade-init output_3">-</output></span><span class="smalllabel highlight_fld_label">Max</span>
+</div>
+</div>
+</div>
+</details> <!-- End Arrange Names & Values -->
+
+<details><summary><strong>Number Format</strong></summary>
+<div class="hs align-center gap-small space-around">
+<div class="vs gap-small">
+<span><label for="value_prefix">Prefix:</label> <input type="text" id="value_prefix" size="4" maxlength="10" onchange="process_sankey();"></span>
+<span><label for="value_suffix">Suffix:</label> <input type="text" id="value_suffix" size="4" maxlength="10" onchange="process_sankey();"></span>
+</div>
+
+<div class="text_center">
+<label for="value_format">Format:</label>
+<select id="value_format" onchange="process_sankey();">
+<option value=",." selected="selected">1,000,000.00</option>
+<option value=".,">1.000.000,00</option>
+<option value=" .">1 000 000.00</option>
+<option value=" ,">1 000 000,00</option>
+<option value="X.">1000000.00</option>
+<option value="X,">1000000,00</option>
+</select>
+<br />
+<span><input type="checkbox" id="labelvalue_fullprecision" value="0" onchange="process_sankey();" class="spaced_checkbox">
+<label for="labelvalue_fullprecision" class="ropt">Show trailing 0s <small>(best for currency)</small></label></span>
+</div>
+</div>
+</details> <!-- End Number Format -->
+</div> <!-- End LABELS -->
+
+<!-- NODES -->
+
+<h2 class="ui_head" onclick="togglePanel('node_options');">
+<span id="node_options_indicator" class="indicator">&ndash;</span>
+Nodes<span id="node_options_hint">:</span></h2>
+<!-- tabindex="0" -->
+<div id="node_options" class="form_chunk">
+<p class="form_elements1">
+<span class="no_wrap" onmouseover="revealVal('node_h');" onmouseout="fadeVal('node_h');">
+<label for="node_h"><strong>Height:</strong></label>
+.<span class="output_container"><input id="node_h" class="slider_small" type="range" min="0" max="100" step="1" value="12" onfocus="revealVal('node_h');" onblur="fadeVal('node_h');" oninput="updateOutput('node_h'); process_sankey();" onchange="process_sankey();"><output id="node_h_val" for="node_h" class="fade-init output_4">-</output></span>|</span>
+
+
+<span class="no_wrap" onmouseover="revealVal('node_spacing');" onmouseout="fadeVal('node_spacing');">
+<label for="node_spacing" class="spaced_label"><strong>Spacing:</strong></label>
+<span class="smalllabel">0</span><span class="output_container"><input id="node_spacing" class="slider_small" type="range" min="0" max="100" step="1" value="75" onfocus="revealVal('node_spacing');" onblur="fadeVal('node_spacing');" oninput="updateOutput('node_spacing'); process_sankey();" onchange="process_sankey();"><output id="node_spacing_val" for="node_spacing" class="fade-init output_4">-</output></span><span class="smalllabel">Max</span></span>
+</p>
+
+<p class="form_elements2">
+<span class="no_wrap"><label for="node_w"><strong>Width:</strong></label>
+<input id="node_w" type="number" class="wholenumber number_100s" min="0" value="10" step="1" onchange="process_sankey();"></span>
+
+<span class="no_wrap"><label for="node_border" class="spaced_label"><strong>Border:</strong></label>
+<input id="node_border" type="number" class="wholenumber number_10s" min="0" value="0" step="1" onchange="process_sankey();"></span>
+
+<span class="no_wrap" onmouseover="revealVal('node_opacity');" onmouseout="fadeVal('node_opacity');">
+<label for="node_opacity" class="spaced_label"><strong>Opacity:</strong></label>
+<span class="smalllabel">0</span><span class="output_container"><input id="node_opacity" class="slider_xxsmall" type="range" min="0" max="1" step="0.05" value="1.0" onfocus="revealVal('node_opacity');" onblur="fadeVal('node_opacity');" oninput="updateOutput('node_opacity'); process_sankey();" onchange="process_sankey();"><output id="node_opacity_val" for="node_opacity" class="fade-init output_3">-</output></span><span class="smalllabel">1</span></span>
+</p>
+
+<fieldset class="form_elements1">
+<legend>Default Node Colors</legend>
+<div class="fieldset_contents">
+Use <input name="node_theme" type="radio" id="node_theme_none" value="none" onchange="process_sankey();" /><label for="node_theme_none" class="ropt">one color:</label>
+<input type="color" id="node_color" title="Single Node Color" size="7" maxlength="7" value="#888888" onchange="checkRadio('node_theme_none'); process_sankey();"> or a Theme:<br />
+<table id="color_themes">
+<tr>
+<td>
+<span id="theme_a" class="theme_container">
+<input name="node_theme" type="radio" id="theme_a_radio" value="a" onchange="process_sankey();" checked="checked" /><label id="theme_a_label" for="theme_a_radio" class="ropt"></label>
+</span>
+</td>
+<td>
+<span class="no_wrap">
+<button id="theme_a_rotate_left" type="submit" title="Rotate theme colors left" onclick="nudgeColorTheme('a',1); return false;">&lt;</button>
+<span id="theme_a_guide"></span><input type="hidden" id="themeoffset_a" value="9">
+<button id="theme_a_rotate_right" type="submit" title="Rotate theme colors right" onclick="nudgeColorTheme('a',-1); return false;">&gt;</button>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<span id="theme_b" class="theme_container">
+<input name="node_theme" type="radio" id="theme_b_radio" value="b" onchange="process_sankey();" /><label id="theme_b_label" for="theme_b_radio" class="ropt"></label>
+</span>
+</td>
+<td>
+<span class="no_wrap">
+<button id="theme_b_rotate_left" type="submit" title="Rotate theme colors left" onclick="nudgeColorTheme('b',1); return false;">&lt;</button>
+<span id="theme_b_guide"></span><input type="hidden" id="themeoffset_b" value="0">
+<button id="theme_b_rotate_right" type="submit" title="Rotate theme colors right" onclick="nudgeColorTheme('b',-1); return false;">&gt;</button>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<span id="theme_c" class="theme_container">
+<input name="node_theme" type="radio" id="theme_c_radio" value="c" onchange="process_sankey();" /><label id="theme_c_label" for="theme_c_radio" class="ropt"></label>
+</span>
+</td>
+<td>
+<span class="no_wrap">
+<button id="theme_c_rotate_left" type="submit" title="Rotate theme colors left" onclick="nudgeColorTheme('c',1); return false;">&lt;</button>
+<span id="theme_c_guide"></span><input type="hidden" id="themeoffset_c" value="0">
+<button id="theme_c_rotate_right" type="submit" title="Rotate theme colors right" onclick="nudgeColorTheme('c',-1); return false;">&gt;</button>
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<span id="theme_d" class="theme_container">
+<input name="node_theme" type="radio" id="theme_d_radio" value="d" onchange="process_sankey();" /><label id="theme_d_label" for="theme_d_radio" class="ropt"></label>
+</span>
+</td>
+<td>
+<span class="no_wrap">
+<button id="theme_d_rotate_left" type="submit" title="Rotate theme colors left" onclick="nudgeColorTheme('d',1); return false;">&lt;</button>
+<span id="theme_d_guide"></span><input type="hidden" id="themeoffset_d" value="0">
+<button id="theme_d_rotate_right" type="submit" title="Rotate theme colors right" onclick="nudgeColorTheme('d',-1); return false;">&gt;</button>
+</span>
+</td>
+</tr>
+</table>
+</div>
+
+</fieldset>
+</div> <!-- End NODES -->
+
+<!-- FLOWS -->
+
+<h2 class="ui_head" onclick="togglePanel('flow_options');">
+<span id="flow_options_indicator" class="indicator">&ndash;</span>
+Flows<span id="flow_options_hint">:</span></h2>
+
+<div id="flow_options" class="form_chunk">
+<p class="form_elements1">
+<span class="no_wrap" onmouseover="revealVal('flow_opacity');" onmouseout="fadeVal('flow_opacity');">
+<label for="flow_opacity"><strong>Opacity:</strong></label>
+<span class="smalllabel">0</span><span class="output_container"><input id="flow_opacity" class="slider_xsmall" type="range" min="0" max="1" step="0.05" value="0.45" onfocus="revealVal('flow_opacity');" onblur="fadeVal('flow_opacity');" oninput="updateOutput('flow_opacity'); process_sankey();" onchange="process_sankey();"><output id="flow_opacity_val" for="flow_opacity" class="fade-init output_3">-</output></span><span class="smalllabel">1</span></span>
+
+<span class="no_wrap" onmouseover="revealVal('flow_curvature');" onmouseout="fadeVal('flow_curvature');">
+<label for="flow_curvature" class="spaced_label"><strong>Curviness:</strong></label>&nbsp;
+|<span class="output_container"><input id="flow_curvature" class="slider_small" type="range" min="0.1" max="0.9" step="0.04" value="0.5" onfocus="revealVal('flow_curvature');" onblur="fadeVal('flow_curvature');" oninput="updateOutput('flow_curvature'); process_sankey();" onchange="process_sankey();"><output id="flow_curvature_val" for="flow_curvature" class="fade-init output_3">-</output></span>(</span>
+</p>
+
+<fieldset class="form_elements2">
+<legend>Default Flow Colors</legend>
+
+<div class="fieldset_contents">
+
+Use <input name="flow_inheritfrom" type="radio" id="flow_inherit_none" value="none" onchange="process_sankey();" /><label for="flow_inherit_none" class="ropt">one color:</label>
+
+<input type="color" id="flow_color" title="Single Flow Color" size="7" maxlength="7" value="#999999" onchange="checkRadio('flow_inherit_none'); process_sankey();" /> or colors from:<br />
+<span class="no_wrap"><input name="flow_inheritfrom" type="radio" id="flow_inherit_from_source" value="source" onchange="process_sankey();" checked="checked" /><label class="ropt" for="flow_inherit_from_source">each flow's Source</label></span>
+<span class="no_wrap"><input name="flow_inheritfrom" type="radio" id="flow_inherit_from_target" value="target" onchange="process_sankey();" /><label class="ropt" for="flow_inherit_from_target">each flow's Target</label></span>
+<br />
+<span class="no_wrap"><input name="flow_inheritfrom" type="radio" id="flow_inherit_outside_in" value="outside-in" onchange="process_sankey();" /><label class="ropt" for="flow_inherit_outside_in">the outermost nodes (flowing in)</label></span>
+</div>
+</fieldset>
+</div> <!-- End FLOWS -->
+
+<!-- LAYOUT OPTIONS -->
+
+<h2 class="ui_head" onclick="togglePanel('layout_options');" id="layout_options_section">
+<span id="layout_options_indicator" class="indicator">+</span>
+Layout Options<span id="layout_options_hint">...</span></h2>
+<div id="layout_options" class="form_chunk" style="display: none;">
+<div class="form_elements1 text_center">
+<small>Note: these options only apply to diagrams<br /> with 3 or more columns of nodes:</small>
+
+<table style="width: 100%;"><tr>
+<td>
+<input type="checkbox" id="layout_justifyorigins" value="1" onchange="process_sankey();"><br />
+<label for="layout_justifyorigins" class="ropt">Place all<br /> flow <strong>origins</strong><br /> at the <strong>left</strong> edge</label>
+</td>
+<td class="text_right">
+<input type="checkbox" id="layout_justifyends" value="1" onchange="process_sankey();"><br />
+<label for="layout_justifyends" class="spaced_label ropt">Place all<br /> flow <strong>endpoints</strong><br /> at the <strong>right</strong> edge</label>
+</td>
+</tr></table>
+</div>
+<p class="form_elements2 text_center">
+<input type="checkbox" id="layout_reversegraph" value="1" onchange="process_sankey();">
+<label for="layout_reversegraph" class="ropt"><strong>Reverse the graph</strong> (flow right-to-left)</label>
+</p>
+
+<p class="form_elements1 text_center">
+<strong>Diagram Scale</strong> = <span id="scale_figures"></span><br />
+For fair comparisons <em>between</em> diagrams:<br />
+1) Use the same units for each, and 2) Make their<br />
+Diagram Scales match as closely as possible.
+</p>
+
+<h3 class="ui_head" onclick="togglePanel('debug_options');"><span id="debug_options_indicator" class="indicator">+</span>Tools for Debugging<span id="debug_options_hint">...</span></h3>
+<div id="debug_options" class="form_chunk" style="display: none;">
+<div class="form_elements1">
+  <span class="no_wrap" onmouseover="revealVal('internal_iterations');" onmouseout="fadeVal('internal_iterations');">
+    <label for="internal_iterations" class="spaced_label"><strong># of Layout Iterations:</strong></label>
+    <span class="smalllabel">0</span>
+    <span class="output_container"><input id="internal_iterations" class="slider_small" type="range" min="0" max="30" step="1" value="25" onfocus="revealVal('internal_iterations');" onblur="fadeVal('internal_iterations');" oninput="updateOutput('internal_iterations'); process_sankey();" onchange="process_sankey();"><output id="internal_iterations_val" for="internal_iterations" class="fade-init output_3">-</output></span>
+    <span class="smalllabel">30</span>
+    </span>
+</div>
+<div class="form_elements2">
+<input type="checkbox" id="internal_revealshadows" value="1" onchange="process_sankey();" class="spaced_checkbox"><label for="internal_revealshadows" class="ropt">Reveal Shadow Nodes</label>
+</div>
+
+</div>
+
+</div> <!-- End LAYOUT -->
+
+</td>
+</tr>
+</table> <!-- End Left Column -->
+
+</td><td id="grapharea">
+<!-- EXPORT -->
+<div class="expandable_box">
+<p id="download_central" class="share-box">
+<strong class="padded-inline"></strong>
+
+<button id="share_button" type="submit" onclick="openGetLinkDialog(); return false;" title="See options for generating a link to this diagram" class="padded-inline"><strong>Get a public link...</strong></button>
+
+<span class="padded-inline"></span>
+
+<button id="save_as_png_2x" type="submit" title="PNG image file: 1200 x 1200" onclick="saveDiagramAsPNG(2); return false;"><strong>Save as a .PNG image</strong></button>
+<span class="toggleable" onclick="togglePanel('png_size_options');" title="Select to choose another resolution">
+<span id="png_size_options_indicator" class="indicator1">+</span>
+<small>more</small><span id="png_size_options_hint">...</span></span>
+<span id="png_size_options" style="display: none;">
+<button id="save_as_png_4x" type="submit" title="PNG image file: 2400 x 2400" onclick="saveDiagramAsPNG(4); return false;"><strong>Large</strong> (4x)</button>
+<button id="save_as_png_6x" type="submit" title="PNG image file: 3600 x 3600" onclick="saveDiagramAsPNG(6); return false;"><strong>Huge</strong> (6x)</button>
+<button id="save_as_png_1x" type="submit" title="PNG image file: 600 x 600" onclick="saveDiagramAsPNG(1); return false;"><strong>Tiny</strong> (1x)</button>
+</span>
+
+<span class="padded-inline"></span>
+
+<button id="save_as_svg" type="submit" title="Save this diagram as a Scalable Vector Graphics file" onclick="saveDiagramAsSVG(); return false;"><strong>Download .SVG</strong></button>
+</p>
+<dialog id="getLinkDialog">
+  <header>
+    <h3>Get a public link to this SankeyMATIC diagram</h3>
+    <button onclick="closeDialog('getLink');" id="closeDialogHeader">✕</button>
+  </header>
+
+  <section class="text_center">
+    <div class="center_basic">
+    <div class="warning-note">
+    <p class="text_left"><strong>Please note:</strong> If your diagram contains <strong>sensitive or private data</strong>, we recommend that you <em><strong>DO NOT USE</strong></em> this public-linking feature to save or share your work.</p>
+<details class="indented">
+  <summary><em><u>Learn more...</u></em></summary>
+    <p class="text_left">Visiting the link below will potentially expose the data you have entered to <strong>any observer</strong> who can see your Internet traffic, up to and including the SankeyMATIC server itself (which, like all web servers, keeps a record of every visited link).</p>
+    <p class="text_left">Instead, you can use the &quot;<strong>Save my work</strong>&quot; and &quot;<strong>Load from file</strong>&quot; buttons to save &amp; reload a diagram in progress <em>without</em> sending a copy of your data beyond your own web browser.</p>
+    </details>
+    </div>
+    </div>
+
+    <div class="vspace">
+<p class="text_left"><strong>Your diagram's public link:</strong></p>
+<div id="generatedLink" class="long-link-area text_left" contenteditable="true">(generating link...)</div>
+<div class="hs align-start space-around">
+<p style="max-width: 25em;">Visiting this link will take anyone to the 'Build' interface and fill in the same data and settings you have now.</p>
+<p class="text_center"><button id="copyLinkButton" class="loadsave_button" onclick="copyGeneratedLink(); return false;">⧉ Copy Public Link</button><br /><span id="copiedMsg"></span></p>
+</div>
+</div>
+  </section>
+
+  <footer>
+    <button onclick="closeDialog('getLink');" id="closeDialogFooter">Close</button>
+  </footer>
+</dialog>
+</div>
+
+<!-- SIZE & SPACING & BACKGROUND -->
+
+<div class="expandable_box">
+<h2 class="ui_head" onclick="togglePanel('diagram_options');">
+<span id="diagram_options_indicator" class="indicator">&ndash;</span>
+Diagram Size &amp; Background<span id="diagram_options_hint">:</span></h2>
+
+<div id="diagram_options" class="form_chunk">
+<p class="form_elements1">
+<span class="no_wrap"><label for="size_w" title="Diagram Width in pixels"><strong>Width:</strong></label>
+<input id="size_w" type="number" class="wholenumber number_10000s" min="40" value="1700" step="2" onchange="process_sankey();"></span>
+<span class="no_wrap"><label for="size_h" class="spaced_label" title="Diagram Height in pixels"><strong>Height:</strong></label>
+<input id="size_h" type="number" class="wholenumber number_10000s" min="40" value="1800" step="2" onchange="process_sankey();"></span>
+
+<label for="bg_color" class="spaced_label"><strong>Background Color:</strong></label>
+<input type="color" id="bg_color" size="7" maxlength="7" value="#1e222d" onchange="process_sankey();">
+<input type="checkbox" id="bg_transparent" value="1" onchange="process_sankey();" class="spaced_checkbox"><label for="bg_transparent" class="ropt">Transparent</label><br />
+</p>
+
+<p class="form_elements2">
+<strong>Margins:</strong>
+<span class="no_wrap"><label for="margin_l" class="spaced_label">Left</label>
+<input id="margin_l" type="number" class="wholenumber number_100s" min="0" value="5" step="1" onchange="process_sankey();">
+<label for="margin_r">Right</label>
+<input id="margin_r" type="number" class="wholenumber number_100s" min="0" value="5" step="1" onchange="process_sankey();"></span>
+<span class="no_wrap"><label for="margin_t" class="spaced_label">Top</label>
+<input id="margin_t" type="number" class="wholenumber number_100s" min="0" value="5" step="1" onchange="process_sankey();">
+<label for="margin_b">Bot</label>
+<input id="margin_b" type="number" class="wholenumber number_100s" min="0" value="5" step="1" onchange="process_sankey();"></span>
+</p>
+</div>
+</div>
+<!-- MOVING NODES -->
+<p id="reset_moves_area" class="form_elements1">
+Move Nodes by <em>dragging</em>. Double-click a Node to reset, or: <button type="button" id="reset_all_moved_nodes" onclick="resetMovesAndRender(); return false;">Reset all moved Nodes</button>
+</p>
+<div id="top_messages_container">
+  <div id="info_messages"></div>
+  <div id="issue_messages"></div>
+</div>
+<div style="height: 0px;position: relative;top: 20px;left: 20px;width: 200px">
+  <fieldset style="border-radius: 10px;">
+  <legend style="color: white;background-color: unset;border-radius: 30px;padding: 5px 15px 5px 15px;font-size: 20px;">Filter: </legend>
+    <div>
+      <input type="radio" id="Show-All" name="sfilter" value="Show-All" checked onclick="noneFilterFlow()" />
+      <label for="Show-All" style="color: white;font-size: 15px;line-height: 25px;">Show All</label>
+    </div>
+    <div>
+      <input type="radio" id="Genesis-Wallets" name="sfilter" value="Genesis-Wallets" onclick="GenesisWFilterFlow()"/>
+      <label for="Genesis-Wallets" style="color: white;font-size: 15px;line-height: 25px;">Genesis Wallets</label>
+    </div>
+    <div>
+      <input type="radio" id="L2" name="sfilter" value="L2" onclick="l2FilterFlow()" />
+      <label for="L2" style="color: white;font-size: 15px;line-height: 25px;">L2</label>
+    </div>
+    <div>
+      <input type="radio" id="Staking" name="sfilter" value="Staking" onclick="stakedFilterFlow()" />
+      <label for="Staking" style="color: white;font-size: 15px;line-height: 25px;">Staking</label>
+    </div>
+    <div>
+      <input type="radio" id="CEX" name="sfilter" value="CEX" onclick="cexFilterFlow()" />
+      <label for="CEX" style="color: white;font-size: 15px;line-height: 25px;">CEX</label>
+    </div>
+    <div>
+      <input type="radio" id="Lost" name="sfilter" value="Lost" onclick="lostFilterFlow()" />
+      <label for="Lost" style="color: white;font-size: 15px;line-height: 25px;">Lost</label>
+    </div>
+  </fieldset> 
+</div>
+<p id="chart">
+<svg id="svg_scratch" height="600" width="600" xmlns="http://www.w3.org/2000/svg" class="hidden_under"></svg>
+<svg id="sankey_svg" height="600" width="600" xmlns="http://www.w3.org/2000/svg"></svg>
+</p>
+<canvas id="png_preview" height="600" width="600" style="background-color: transparent; display: none;"></canvas>
+<div id="chartfooter">
+<p class="form_elements1 text_center">
+<input type="checkbox" id="meta_mentionsankeymatic" value="1" onchange="process_sankey();" checked>
+<label class="smalllabel ropt" for="meta_mentionsankeymatic">Include &ldquo;By Eth Wave - GardenofThings.com --- Forked from SankeyMATIC.com&rdquo;</label>
+</p>
+</div>
+<table id="messages" class="expandable_box">
+<tr><td>
+  <div id="messages_area">
+    <h4>About this diagram</h4>
+    <div id="totals_area"></div>
+  </div>
+</td></tr>
+<tr><td id="imbalances_area">
+<div id="imbalance_control">
+<span class="underline"><strong><em>When Total Inputs &ne; Total Outputs:</em></strong></span><br>
+<p class="form_elements3">
+  Attach incomplete flow groups to:<br>
+<span><input name="layout_attachincompletesto" id="layout_attachto_leading" value="leading" type="radio" onchange="process_sankey();" /><label for="layout_attachto_leading" class="ropt">The leading edge of the Node</label></span><br>
+<span><input name="layout_attachincompletesto" id="layout_attachto_trailing" value="trailing" type="radio" onchange="process_sankey();" /><label for="layout_attachto_trailing" class="ropt">The trailing edge of the Node</label></span><br>
+<span><input name="layout_attachincompletesto" id="layout_attachto_nearest" value="nearest" type="radio" onchange="process_sankey();" checked="checked" /><label for="layout_attachto_nearest" class="ropt">The edge nearest to the flow group's center</label></span>
+</p>
+<p class="lastrow">
+<input type="checkbox" id="meta_listimbalances" value="1" onchange="process_sankey();" checked="checked" />
+<label class="ropt" for="meta_listimbalances">List all imbalanced Nodes</label>
+</p>
+<div id="imbalance_messages"></div>
+</div>
+</td></tr>
+</table>
+</td></tr></table> <!-- End SKM Form -->
+</form>
+
+</div>
+<!-- ====================== Bottom Matter ====================== -->
+
+</main>
+
+<hr class="ad_divider" />
+<div class="ad_center">
+</div>
+
+<footer class="footer vs align-center reset-fonts">
+  <div class="callout-container pad-medium">
+  <span class="indented">If you find SankeyMATIC useful, please consider <a href="../about/" class="internal-link" title="(new window) About SankeyMATIC and how to support the site" target="_blank">donating to support further development</a>. Thanks!</span>
+  </div>
+  <div class="footer__inner hs-md-vs align-center space-around">
+    <div class="footer__content text_left">
+    <p>
+    Follow:
+  🦣&nbsp;<strong><a href="https://vis.social/@SankeyMATIC" title="(new window) SankeyMATIC's Mastodon account" target="_blank" rel="noopener me">@SankeyMATIC@vis.social</a></strong>
+    </p>
+    <p>
+    <strong>SankeyMATIC</strong> is produced by
+  <a href="http://nowthis.com/" title="(new window) Steve's personal site" target="_blank" rel="noopener">Steve Bogart</a>
+  <small>(🦣&nbsp;<a href="https://tilde.zone/@nowthis" title="(new window) Steve's Mastodon account" target="_blank" rel="noopener">@nowthis@tilde.zone</a>)</small>.
+    </p>
+    <p>
+  <small><a href="https://github.com/nowthis/sankeymatic" title="(new window) SankeyMATIC source code at GitHub" target="_blank" rel="noopener"><strong>Source code</strong> is available</a> at GitHub.<br>
+  SankeyMATIC builds on the open source tool <a href="http://d3js.org/" title="(new window) D3's home page" target="_blank" rel="noopener">D3.js</a><br />
+  &amp; a modified version of its <a href="https://github.com/d3/d3-sankey" title="(new window) The D3 Sankey plugin at GitHub" target="_blank" rel="noopener">Sankey plugin</a>.
+    </small>
+    </p>
+  <p><a href="/privacy/">Privacy Policy</a></p>
+    </div>
+
+    <div class="footer__nav">
+      <ul class="hs-sm-vs align-center">
+      <li><a title="SankeyMATIC home page" href="/">Home</a></li>
+      <li><a title="What's New with SankeyMATIC" href="/news/">News</a></li>
+      <li><a title="Gallery of SankeyMATIC Examples" href="/gallery/">Gallery</a></li>
+      <li><a title="How to use SankeyMATIC to the fullest" href="/manual/">Manual</a></li>
+      <li><a title="About SankeyMATIC and how to support the site" href="/about/">About</a></li>
+      </ul>
+    </div>
+
+  </div>
+</footer>
+<div class='sourceList sourceShift resizeSankey'>Welcome to version 3 of my ETH supply breakdown project. I’m ETH Wave, and I’m working on visualising all things Ethereum in particular, the decentralised distribution of Ether focusing on wallet categorisation at scale. As this project is still a work in progress, your feedback is invaluable. <br><br>
+This visualization is programmed to evolve – for example if a L2 is added to L2beat it will be reflected in the diagram likewise if hildobby tags more CEX addresses then they will be included. <br><br>
+Please provide any feedback or suggestions on social media. In one week’s time, I will collate all feedback and merge it with previous suggestions that I have yet to act upon. I want this project to be as community-driven as possible, so I truly value your input. <br><br>
+With the current data I have, I plan on creating further visualisations and deep dives into various categories. Keep an eye out for new tabs on the website and announcements on social media. <br>
+For the first week, the data will update every 24 hours. After that, the frequency of updates will depend on community interest and funding. Even without additional funding, I should still be able to update the data weekly. <br>
+In future versions, I plan to explore many areas, including but not limited to:
+<ul>
+<li>DeFi </li>
+<li>DAOs </li>
+<li>Prediction markets </li>
+<li>Smart wallets </li>
+<li>Gaming </li>
+<li>NFTs </li>
+<li>Hacks </li>
+</ul>
+I also plan to improve upon the current categories. To do this properly, I’ll need access to more data, which will likely require a Dune Plus account. This account will allow me to access the data I need and will allow for more advanced queries to be ran at regular intervals. If you would like to support me and this project, please consider donating below.
+<br>
+</div>
+<div class='donatePlzCont resizeSankey'>
+  <div class='sourceList sourceShift donatePlz'><strong>Donate</strong> - Please Donate to support me and the project<br>
+    <div class='sourceList'>
+      Ethereum / Arbitrum One / Base <br>
+      Address: 0x5566BfdB06a1bfE92D017a4c55c32AFAEEB24B17
+    </div>
+  </div>
+</div>
+<div class='sourceList sourceShift resizeSankey'>Source List (Un-Ordered)<br>
+  <div class='sourceListCont'>
+    <div class='sourceList sourceCat'>Staked
+      <div class='sourceList'>@hildobby ETH Stakers<br>
+        Dune API<br>
+        https://dune.com/queries/2394100
+      </div>
+    </div>
+    <div class='sourceList sourceCat'>L2
+      <div class='sourceList'>L2Beat API<br>
+        https://l2beat.com/scaling/summary
+      </div>
+      <div class='sourceList'>@rp_community LST Pegs<br>
+        forked from @drworm/rETH Peg and Market Price<br>
+        Dune API<br>
+        https://dune.com/queries/1933584
+      </div>
+    </div>
+    <div class='sourceList sourceCat'>CEX
+      <div class='sourceList'>@hildobby All Known CEX Addresses<br>
+        Dune API<br>
+        https://dune.com/queries/3237025
+      </div>
+      <div class='sourceList'>Etherscan API<br>
+        https://etherscan.io/
+      </div>
+    </div>
+    <div class='sourceList sourceCat'>Lost Eth
+      <div class='sourceList'>jconorgrogan Lost-ETH<br>
+        raw.githubusercontent<br>
+        https://github.com/jconorgrogan/Lost-ETH
+      </div>
+      <div class='sourceList'>Etherscan API<br>
+        https://etherscan.io/
+      </div>
+    </div>
+    <div class='sourceList sourceCat'>Total Burned + Defi Stale
+      <div class='sourceList'>Ultra Sound Money API<br>
+        https://ultrasound.money/
+      </div>
+      <div class='sourceList'>Etherscan API<br>
+        https://etherscan.io/
+      </div>
+    </div>
+    <div class='sourceList sourceCat'>Genesis Wallets
+      <div class='sourceList'>Genesis ICO Addresses<br>
+        forked from @beetle/Genesis ICO<br>
+        https://dune.com/queries/3422356
+      </div>
+      <div class='sourceList'>Etherscan API<br>
+        https://etherscan.io/
+      </div>
+    </div>
+    <div class='sourceList sourceCat'>Eigen Layer<br>
+      Liquid Restaking + EigenPod
+      <div class='sourceList'>@blockintel Eigen Layer<br>
+        Dune API<br>
+        https://dune.com/queries/3297167
+      </div>
+      <div class='sourceList'>@blockintel Eigen Layer<br>
+        Dune API<br>
+        https://dune.com/queries/3344085
+      </div>
+    </div>
+    <div class='sourceList sourceCat'>Ethereum Total Supply<br>
+      Mining Rewards + Staking Rewards
+      <div class='sourceList'>Etherscan API<br>
+        https://etherscan.io/
+      </div>
+    </div>
+  </div>
+  This Sankey wouldn't be possible without the data providers and data wizards in this source list - I humbly stand on the shoulders of giants and thank them for their contribution.
+</div>
+<script src="adjustSize.js"></script>
+</body>
+</html>

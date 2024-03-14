@@ -1,0 +1,160 @@
+.sponsor {
+  max-width: 1230px;
+  max-height: 330px;
+  aspect-ratio: 1230/330;
+  padding: 10px;
+  background-color: #004477;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20px 1fr 1fr;
+  grid-gap: 10px;
+  border-radius: 10px;
+  margin: 10px 16px 0px;
+}
+
+
+.sponsor-text {
+  grid-column: 1/4;
+  color: white;
+  font-size: medium;
+  font-weight: bold;
+  line-height: 25px;
+}
+
+.sponsor-info {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+  color: black;
+  float: right;
+  text-align: center;
+  line-height: 20px;
+}
+
+.sponsor-info:hover + .sponsor-info-text {
+  display: block;
+}
+
+.sponsor-info-text {
+  max-width: 60vw;
+  background-color: white;
+  color: black;
+  width: 300px;
+  height: 100px;
+  padding: 5px;
+  border-radius: 5px;
+  position: relative;
+  float: right;
+  z-index: 10;
+  margin-right: 5px;
+  display: none;
+}
+
+.sponsor-info:hover {
+  background-color: red;
+}
+
+.first, .second, .third {
+  background-color: red;
+  border-radius: 5px;
+}
+
+.spon-contain {
+  display: grid;
+  grid-template-columns: 600fr 400fr 200fr;
+  grid-gap: 10px;
+}
+
+.first {
+  aspect-ratio: 600 / 144;
+}
+
+.second {
+  aspect-ratio: 400 / 144;
+}
+
+.third {
+  aspect-ratio: 200 / 144;
+}
+
+
+.badge {
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  background-color: rgba(255, 255, 255, 0.45);
+  float: right;
+  padding:2px;
+  border-radius: 0px 5px 0px 5px;
+  text-align: center;
+}
+
+.disclaimer {
+  grid-row: 3;
+  border-radius: 5px;;
+  padding: 10px;
+  background-color: white;
+  overflow-y: scroll;
+}
+
+
+.donatePlzCont {
+  max-width: 1720px;
+  display: grid;
+  place-items: center;
+}
+
+.donatePlz {
+  font-size: x-large;
+  text-align: center;
+  background-color: #004477;
+  width: 660px;
+}
+
+/*@media (max-width:1250px) {*/
+.badge-small {
+  font-size: smaller;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+
+/*@media (max-width:800px) {*/
+.sponsor-small {
+  max-width: unset;
+  max-height: unset;
+  grid-template-rows: 20px 1fr 1fr;
+}
+.spon-contain-small {
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
+  grid-row: 2;
+}
+.first-small {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+}
+.second-small {
+  grid-column: 1;
+  grid-row: 2;
+}
+.third-small {
+  grid-column: 2;
+  grid-row: 2;
+}
+.disclaimer-small {
+  height: 80px;
+  grid-row: -1;
+}
+.sponsor-text-small {
+  font-size: smaller;
+  height: 10px;
+  grid-row: 1;
+}
+.donatePlz-small {
+  font-size: large;
+  width: unset;
+  padding: 10px;
+}

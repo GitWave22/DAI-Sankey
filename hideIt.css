@@ -1,0 +1,40 @@
+.header, .callout-container, #example_diagrams, #other_entry, #chartfooter, .ad_divider, .ad_center, .footer, .share-box, #messages, .form_elements2 {
+	display: none;
+}
+
+/*.form_chunk {
+	border-radius: 0px 0px 8px 8px;
+}
+*/
+
+body {
+	background: #1e222d;
+}
+
+#chart, #sankey_svg {
+	border-radius: 10px;
+}
+
+.center_basic {
+	display: initial;
+}
+
+.form_chunk {
+	margin: initial;
+}
+
+.expandable_box {
+	max-width: calc(100vw - 40px);
+}
+
+#reset_moves_area {
+	background: #fbfeff;
+	width: calc(100% - 7px);
+	max-width: calc(100vw - 47px);
+	margin-left: 0px;
+	border-radius: 0px 0px 8px 8px;
+}
+
+#diagram_options {
+	padding: initial;
+}
