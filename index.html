@@ -632,9 +632,9 @@ Diagram Size &amp; Background<span id="diagram_options_hint">:</span></h2>
 <div id="diagram_options" class="form_chunk">
 <p class="form_elements1">
 <span class="no_wrap"><label for="size_w" title="Diagram Width in pixels"><strong>Width:</strong></label>
-<input id="size_w" type="number" class="wholenumber number_10000s" min="40" value="1700" step="2" onchange="process_sankey();"></span>
+<input id="size_w" type="number" class="wholenumber number_10000s" min="40" value="1200" step="2" onchange="process_sankey();"></span>
 <span class="no_wrap"><label for="size_h" class="spaced_label" title="Diagram Height in pixels"><strong>Height:</strong></label>
-<input id="size_h" type="number" class="wholenumber number_10000s" min="40" value="1800" step="2" onchange="process_sankey();"></span>
+<input id="size_h" type="number" class="wholenumber number_10000s" min="40" value="1000" step="2" onchange="process_sankey();"></span>
 
 <label for="bg_color" class="spaced_label"><strong>Background Color:</strong></label>
 <input type="color" id="bg_color" size="7" maxlength="7" value="#1e222d" onchange="process_sankey();">
@@ -662,7 +662,7 @@ Move Nodes by <em>dragging</em>. Double-click a Node to reset, or: <button type=
   <div id="info_messages"></div>
   <div id="issue_messages"></div>
 </div>
-<div style="height: 0px;position: relative;top: 20px;left: 20px;width: 200px">
+<!-- <div style="height: 0px;position: relative;top: 20px;left: 20px;width: 200px">
   <fieldset style="border-radius: 10px;">
   <legend style="color: white;background-color: unset;border-radius: 30px;padding: 5px 15px 5px 15px;font-size: 20px;">Filter: </legend>
     <div>
@@ -690,7 +690,7 @@ Move Nodes by <em>dragging</em>. Double-click a Node to reset, or: <button type=
       <label for="Lost" style="color: white;font-size: 15px;line-height: 25px;">Lost</label>
     </div>
   </fieldset> 
-</div>
+</div> -->
 <p id="chart">
 <svg id="svg_scratch" height="600" width="600" xmlns="http://www.w3.org/2000/svg" class="hidden_under"></svg>
 <svg id="sankey_svg" height="600" width="600" xmlns="http://www.w3.org/2000/svg"></svg>

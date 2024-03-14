@@ -1678,6 +1678,7 @@ function render_sankey(allNodes, allFlows, cfg, numberStyle) {
       .attr('font-weight', '400')
       .attr('fill', mColor)
       .text(`By Eth Wave - GardenofThings.com
+        Sponsor: Steakhouse Financial
         Forked from SankeyMATIC.com
         Uses D3.js & Canvg `);
   }

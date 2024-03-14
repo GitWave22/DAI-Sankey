@@ -1,5 +1,5 @@
 .sponsor {
-  max-width: 1230px;
+/*  max-width: 1230px;
   max-height: 330px;
   aspect-ratio: 1230/330;
   padding: 10px;
@@ -9,7 +9,8 @@
   grid-template-rows: 20px 1fr 1fr;
   grid-gap: 10px;
   border-radius: 10px;
-  margin: 10px 16px 0px;
+  margin: 10px 16px 0px;*/
+  display: none;
 }
 
 
@@ -100,9 +101,10 @@
 
 
 .donatePlzCont {
-  max-width: 1720px;
+/*  max-width: 1720px;
   display: grid;
-  place-items: center;
+  place-items: center;*/
+  display: none;
 }
 
 .donatePlz {
