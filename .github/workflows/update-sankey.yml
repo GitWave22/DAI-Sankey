@@ -1,8 +1,11 @@
 name: Update Output File
 
+# on:
+#   schedule:
+#     - cron: "0 */24 * * *"
+
 on:
-  schedule:
-    - cron: "0 */24 * * *"
+  workflow_dispatch:  # Manually trigger the workflow
 
 jobs:
   update_output:
