@@ -12,7 +12,7 @@ query = QueryBase(
     query_id=3523957,
 )
 
-dune = DuneClient.from_env()
+dune = DuneClient(api_key=os.environ["DUNE_API_KEY"])
 results = dune.run_query(query)
 
 results_d = dune.run_query_dataframe(query)
