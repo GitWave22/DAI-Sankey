@@ -3,6 +3,7 @@ load_dotenv()
 
 import os
 api_key = os.environ.get('DUNE_API_KEY')
+print(api_key)
 
 from dune_client.types import QueryParameter
 from dune_client.client import DuneClient
