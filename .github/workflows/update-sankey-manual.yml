@@ -21,8 +21,9 @@ jobs:
           python-version: 3.x
 
       - name: Install dependencies
-        run: pip install pandas
-        run: pip install dune-client
+        run: | 
+          pip install pandas
+          pip install dune-client
 
       - name: Run Python script
         run: |
