@@ -22,9 +22,9 @@ jobs:
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Run update_output.py
+    - name: Run python/update_output.py
       run: |
-        python update_output.py
+        python python/update_output.py
 
     - name: Commit and push if it changed
       run: |
