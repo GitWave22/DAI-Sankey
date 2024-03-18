@@ -1,4 +1,2 @@
-From
-Amount
-To
-Input
+"new data line 1"
+"new data line 2"
