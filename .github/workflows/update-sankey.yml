@@ -23,6 +23,6 @@ jobs:
 
       - name: Run Python script
         run: |
-          python your_script.py
+          python python/get-data.py
           # Use the secret in your script
           echo ${{ secrets.DUNE_DAI_KEY }}
