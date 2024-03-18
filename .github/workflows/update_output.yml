@@ -1,0 +1,35 @@
+name: Update output.txt
+
+on:
+  workflow_dispatch:  # Manually trigger the workflow
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Run update_output.py
+      run: |
+        python update_output.py
+
+    - name: Commit and push if it changed
+      run: |
+        git diff
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Action"
+        git commit -am "Update output.txt" || exit 0
+        git push
