@@ -12,16 +12,18 @@ query = QueryBase(
     query_id=3523957,
 )
 
-dune = DuneClient(api_key=os.environ["DUNE_API_KEY"])
-results = dune.run_query(query)
+try:
+    dune = DuneClient(api_key=api_key)
+    results = dune.run_query(query)
+    results_d = dune.run_query_dataframe(query)
+    results_df = results_d.copy()
 
-results_d = dune.run_query_dataframe(query)
-results_df = results_d.copy()
-
-import pandas as pd
-superData = pd.DataFrame(columns=['From', 'Amount', 'To', 'Input'])
-
-totalDai = round(results_df['total_balance'].iloc[0], 1)
+    import pandas as pd
+    superData = pd.DataFrame(columns=['From', 'Amount', 'To', 'Input'])
+    totalDai = round(results_df['total_balance'].iloc[0], 1)
+    print(f"Total DAI balance: {totalDai}")
+except Exception as e:
+    print(f"Error: {e}")
 
 hopOne = []
 
