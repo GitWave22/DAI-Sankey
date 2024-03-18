@@ -47,8 +47,8 @@ for index, row in results_df_sortedTwo.iterrows():
         new_row = pd.DataFrame({'From': [row['wallet']], 'Amount': [hopTwoAmount], 'To': [row['protocol']], 'Input': [f"{row['wallet']} {hopeOnePercent}% [{hopTwoAmount}] {row['protocol']} {hopeTwoPercent}%"]})
         superData = pd.concat([superData, new_row])
         
-# for index, row in superData.iterrows():
-#     print(row['Input'])
+for index, row in superData.iterrows():
+    print(row['Input'])
 
 with open('output.txt', 'w') as output_file:
     for row in superData:
