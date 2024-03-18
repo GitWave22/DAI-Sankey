@@ -1,4 +1,2 @@
-this
-is
-a
-1 test
+"new data line 1"
+"new data line 2"
