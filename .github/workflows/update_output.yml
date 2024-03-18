@@ -27,9 +27,11 @@ jobs:
         python python/update_output.py
 
     - name: Commit and push if it changed
+    env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
       run: |
         git diff
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Action"
         git commit -am "Update output.txt" || exit 0
-        git push https://${{ secrets.GH_PAT }}@github.com/GitWave22/DAI-Sankey.git
+        git push https://${{ GITHUB_TOKEN }}@github.com/GitWave22/DAI-Sankey.git
