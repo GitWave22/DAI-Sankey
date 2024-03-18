@@ -31,6 +31,6 @@ jobs:
         run: |
           python python/get-data.py
           # Use the secret in your script
-          echo ${{ secrets.DUNE_DAI_KEY }}
+          echo ${{ secrets.DUNE_API_KEY }}
 
 #update2
