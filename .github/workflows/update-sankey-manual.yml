@@ -32,5 +32,5 @@ jobs:
           python python/get-data.py
           # Use the secret in your script
           echo ${{ secrets.DUNE_API_KEY }}
-
-#update2
+          env:
+          DUNE_API_KEY: ${{ secrets.DUNE_API_KEY }}
