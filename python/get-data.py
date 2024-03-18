@@ -50,8 +50,8 @@ for index, row in results_df_sortedTwo.iterrows():
 for index, row in superData.iterrows():
     print(row['Input'])
 
-with open('output.txt', 'w') as output_file:
-    for row in superData:
-        output_file.write(f"{row}\n")
+with open('output.txt', 'w') as f:
+    for index, row in superData.iterrows():
+        f.write(str(row['Input']) + '\n')
 
 print("Data written to output.txt successfully.")
