@@ -1,2 +1,4 @@
-"new data line 1"
-"new data line 2"
+From
+Amount
+To
+Input
