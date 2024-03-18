@@ -25,6 +25,7 @@ jobs:
           pip install pandas
           pip install dune-client
           pip install python-dotenv
+          pip install setuptools
 
       - name: Run Python script
         run: |
