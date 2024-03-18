@@ -1,2 +1,65 @@
-"new data line 1"
-"new data line 2"
+DAI 100% [2260337012.0] EOA 48.8%
+DAI 100% [1405341920.9] DSR 30.4%
+DAI 100% [299312812.0] Bridge 6.5%
+DAI 100% [199100674.2] DEX 4.3%
+DAI 100% [176967906.6] Other 3.8%
+DAI 100% [131566078.8] Treasury 2.8%
+DAI 100% [94274191.4] CeFi 2.0%
+DAI 100% [59859229.3] Lending 1.3%
+DAI 100% [487065.4] Yield Farm 0.0%
+DAI 100% [47209.8] PSM 0.0%
+DAI 100% [47.8] MEV Bot 0.0%
+EOA 48.8% [2260337012.0] Other 48.8%
+DSR 30.4% [1406093753.7] maker 30.4%
+Bridge 6.5% [151870875.2] matic 3.3%
+Treasury 2.8% [129838781.6] gnosis_safe 2.8%
+DEX 4.3% [77875197.5] uniswap_v2 1.7%
+Bridge 6.5% [76402170.3] Arbitrum 1.7%
+DEX 4.3% [63943953.1] uniswap_v3 1.4%
+Other 3.8% [58968233.4] spark_protocol 1.3%
+CeFi 2.0% [56633408.8] Binance 1.2%
+Other 3.8% [46647214.8] pulsechain 1.0%
+DEX 4.3% [43537856.8] curvefi 0.9%
+Bridge 6.5% [33200082.1] Optimism 0.7%
+Lending 1.3% [30491754.9] compound_v2 0.7%
+Other 3.8% [21200000.0] Tornado Cash 0.5%
+Bridge 6.5% [19451319.5] Avalanche 0.4%
+Lending 1.3% [15800724.7] aave_v2 0.3%
+Other 3.8% [12272317.8] aave_v3 0.3%
+Other 3.8% [9805511.6] curve 0.2%
+CeFi 2.0% [8072956.5] Kraken 0.2%
+DEX 4.3% [5492081.3] sushi 0.1%
+Lending 1.3% [4923799.1] nexusmutual 0.1%
+CeFi 2.0% [4881513.5] Unknown 0.1%
+Lending 1.3% [3783539.4] UwUlend 0.1%
+Other 3.8% [3291323.2] across_v2 0.1%
+Bridge 6.5% [3073582.4] hop_protocol 0.1%
+Bridge 6.5% [3068908.2] base 0.1%
+CeFi 2.0% [2644792.4] OKEx 0.1%
+Other 3.8% [2589626.4] railgun 0.1%
+CeFi 2.0% [2501225.9] FTX 0.1%
+CeFi 2.0% [2466729.8] Coinbase 0.1%
+Bridge 6.5% [2302050.6] near 0.0%
+CeFi 2.0% [2287776.3] Bitget 0.0%
+Bridge 6.5% [2196044.5] zksync 0.0%
+CeFi 2.0% [1995641.1] Stake.com 0.0%
+DEX 4.3% [1990424.1] Synapse Stableswap 0.0%
+DEX 4.3% [1816859.7] swarm 0.0%
+Other 3.8% [1794765.5] axelar 0.0%
+DEX 4.3% [1789220.3] balancer_v2 0.0%
+Lending 1.3% [1741037.0] notional_v2 0.0%
+CeFi 2.0% [1681448.0] Gemini 0.0%
+Other 3.8% [1680515.0] setprotocol_v2 0.0%
+Other 3.8% [1675807.3] ajna 0.0%
+Bridge 6.5% [1649062.3] metis 0.0%
+Bridge 6.5% [1522310.6] wormhole 0.0%
+CeFi 2.0% [1411442.9] Kucoin 0.0%
+CeFi 2.0% [1404381.4] Crypto.com 0.0%
+Bridge 6.5% [1342430.3] dydx 0.0%
+Other 3.8% [1282000.0] tornado_cash 0.0%
+Bridge 6.5% [1244303.2] zksync_v2 0.0%
+Other 3.8% [1241529.5] starknet 0.0%
+Treasury 2.8% [1159086.0] olympusdao 0.0%
+Lending 1.3% [1121913.9] aave 0.0%
+Other 3.8% [1055919.1] connext_amarok_eth 0.0%
+DEX 4.3% [1047124.9] dodo 0.0%
