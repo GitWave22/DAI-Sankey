@@ -19,6 +19,7 @@ jobs:
 
       - name: Install dependencies
         run: pip install pandas
+        run: pip install dune-client
 
       - name: Run Python script
         run: |
