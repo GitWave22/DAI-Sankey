@@ -1,1 +1,27 @@
+name: Update Output File
 
+on:
+  schedule:
+    - cron: "0 */24 * * *"
+
+jobs:
+  update_output:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install pandas
+
+      - name: Run Python script
+        run: |
+          python your_script.py
+          # Use the secret in your script
+          echo ${{ secrets.DUNE_DAI_KEY }}
