@@ -1,0 +1,44 @@
+name: Update Output File
+
+on:
+  schedule:
+    - cron: "0 */24 * * *"
+
+jobs:
+  update_output:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: | 
+          pip install pandas
+          pip install dune-client
+          pip install python-dotenv
+          pip install setuptools
+
+      - name: Set API Key
+        run: echo "DUNE_API_KEY=$DUNE_API_KEY" >> $GITHUB_ENV
+        env:
+          DUNE_API_KEY: ${{ secrets.DUNE_API_KEY }}
+          
+      - name: Run Python script
+        run: |
+          python python/get-data.py
+
+      - name: Commit and push if it changed
+        run: |
+          git diff
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Action"
+          git commit -am "Update output.txt" || exit 0
+          git push https://${{ secrets.GH_PAT }}@github.com/GitWave22/DAI-Sankey.git
