@@ -1,4 +1,4 @@
-name: Update Output File
+name: Auto Update
 
 on:
   schedule:
