@@ -52,7 +52,7 @@ for x in range(len(assetsListSorted)):
     new_row = pd.DataFrame({'From': [assetN], 'Amount': [assetV], 'To': ['Assets'], 'Input': f"{assetN} {round(assetP,1)}% [{round(assetV,1)}] Assets 100%"})
     superData = pd.concat([superData, new_row])
 
-new_row = pd.DataFrame({'From': ['Assets'], 'Amount': [assetV], 'To': ['Liabilities'], 'Input': f"Assets 100% [{assets}] Liabilities 100%"})
+new_row = pd.DataFrame({'From': ['Assets'], 'Amount': [assets], 'To': ['Liabilities'], 'Input': f"Assets 100% [{assets}] Liabilities 100%"})
 superData = pd.concat([superData, new_row])
 
 daiP = ''
