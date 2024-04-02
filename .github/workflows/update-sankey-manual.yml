@@ -24,6 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: | 
+          pip install dataclasses_json
           pip install pandas
           pip install dune-client
           pip install python-dotenv
