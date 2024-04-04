@@ -1,4 +1,4 @@
-## DAI Supply Sankey
+# DAI Supply Sankey
 
 ### Availiable at:
 [Garden of Things](https://gardenofthings.com/g/dai-supply) - (https://gardenofthings.com/g/dai-supply)
