@@ -1,50 +1,50 @@
-Crypto-Loans 48.3% [2411152883.1] Assets 100%
-Stablecoins 29.7% [1483386915.8] Assets 100%
-Real-World Assets 21.9% [1093759263.4] Assets 100%
+Crypto-Loans 47.4% [2412478014.4] Assets 100%
+Stablecoins 32.1% [1637224405.6] Assets 100%
+Real-World Assets 20.5% [1043019190.5] Assets 100%
 Others assets 0.0% [48533.1] Assets 100%
-Assets 100% [4988347595.4] Liabilities 100%
-Liabilities 100% [3265242288.1] DAI 65.5%
-Liabilities 100% [1668527483.6] DSR 33.4%
-Liabilities 100% [54577823.6] Surplus Buffer 1.1%
-DAI 65.5% [2257662455.8] EOA 68.1%
-DAI 65.5% [320440234.0] Bridge 8.2%
-DAI 65.5% [258995657.2] DEX 6.0%
-DAI 65.5% [204457621.8] Other 7.6%
-DAI 65.5% [138125929.0] Lending 4.2%
-DAI 65.5% [85921050.8] CeFi 2.3%
-DAI 65.5% [19267690.2] Treasury 3.0%
-DSR 33.4% [1137193509.3] EOA 68.1%
-DSR 33.4% [175839834.0] Other 7.6%
-DSR 33.4% [129172359.1] Treasury 3.0%
-DSR 33.4% [88337587.3] Bridge 8.2%
-DSR 33.4% [69829970.0] Lending 4.2%
-DSR 33.4% [39547070.0] DEX 6.0%
-DSR 33.4% [27949002.4] CeFi 2.3%
-Other 7.6% [209013059.8] GnosisSafev1.3.0 4.2%
-Bridge 8.2% [181414097.4] Polygon 3.6%
-DEX 6.0% [94942161.0] Pair 1.9%
-Treasury 3.0% [94845344.8] Safev1.1.1 1.9%
-Lending 4.2% [85388730.3] AToken 1.7%
-Bridge 8.2% [77568731.8] Gnosis Chain 1.6%
-Lending 4.2% [69428355.1] VariableDebtToken 1.4%
-DEX 6.0% [65543324.6] Curve.fi: DAI/USDC/USDT Pool 1.3%
-Other 7.6% [64217014.5] MorphoBlue 1.3%
-Bridge 8.2% [60548135.8] Arbitrum 1.2%
-CeFi 2.3% [56547154.6] Binance 1.1%
-DEX 6.0% [53933384.1] Uniswap v3 1.1%
-DEX 6.0% [53473553.1] CurveStableSwapNG 1.1%
-Treasury 3.0% [47750093.6] OlympusTreasury 1.0%
-Other 7.6% [38708491.8] PulseChainOmnibridge 0.8%
-Lending 4.2% [32952308.3] Compound 0.7%
-Bridge 8.2% [31652383.2] Optimism 0.6%
-CeFi 2.3% [28170068.8] Nexo 0.6%
-Bridge 8.2% [19889215.7] Avalanche 0.4%
-Other 7.6% [17100000.0] Tornado Cash 0.3%
-Other 7.6% [15428092.7] Clearinghouse 0.3%
-Bridge 8.2% [14789055.4] L1StandardBridge 0.3%
-Lending 4.2% [14663775.3] Aave v2 0.3%
-DEX 6.0% [8044309.3] Uniswap v2 0.2%
-Other 7.6% [7429840.3] StrategyDsrDai 0.1%
-Bridge 8.2% [5737067.8] Pool 0.1%
-Treasury 3.0% [5302646.9] Safev1.0.0 0.1%
-DEX 6.0% [5277689.3] Balancer v2 0.1%
+Assets 100% [5092770143.6] Liabilities 100%
+Liabilities 100% [3285978332.5] DAI 64.5%
+Liabilities 100% [1753416889.3] DSR 34.4%
+Liabilities 100% [53374921.8] Surplus Buffer 1.0%
+DAI 64.5% [2237880388.0] EOA 67.7%
+DAI 64.5% [321098938.0] Bridge 8.1%
+DAI 64.5% [254561572.9] DEX 5.8%
+DAI 64.5% [194130653.2] Other 7.3%
+DAI 64.5% [144795535.5] Lending 4.2%
+DAI 64.5% [84352659.6] CeFi 2.4%
+DAI 64.5% [19218269.0] Treasury 2.9%
+DSR 34.4% [1210770771.1] EOA 67.7%
+DSR 34.4% [177019440.7] Other 7.3%
+DSR 34.4% [129172359.1] Treasury 2.9%
+DSR 34.4% [88963233.2] Bridge 8.1%
+DSR 34.4% [69307596.5] Lending 4.2%
+DSR 34.4% [40263338.4] DEX 5.8%
+DSR 34.4% [37261998.8] CeFi 2.4%
+Other 7.3% [209339153.5] GnosisSafev1.3.0 4.1%
+Bridge 8.1% [182294911.0] Polygon 3.6%
+Treasury 2.9% [94795911.7] Safev1.1.1 1.9%
+DEX 5.8% [93322914.9] Pair 1.8%
+Lending 4.2% [88796411.8] AToken 1.7%
+Bridge 8.1% [77515075.1] Gnosis Chain 1.5%
+Lending 4.2% [70170522.7] VariableDebtToken 1.4%
+DEX 5.8% [62193967.1] Curve.fi: DAI/USDC/USDT Pool 1.2%
+Bridge 8.1% [60692976.8] Arbitrum 1.2%
+CeFi 2.4% [56138056.9] Binance 1.1%
+DEX 5.8% [54942092.3] CurveStableSwapNG 1.1%
+DEX 5.8% [54686790.7] Uniswap v3 1.1%
+Other 7.3% [54403392.7] MorphoBlue 1.1%
+Treasury 2.9% [47750093.6] OlympusTreasury 0.9%
+Other 7.3% [38952012.5] PulseChainOmnibridge 0.8%
+CeFi 2.4% [37352544.3] Nexo 0.7%
+Lending 4.2% [33962692.7] Compound 0.7%
+Bridge 8.1% [31454475.1] Optimism 0.6%
+Bridge 8.1% [19880446.9] Avalanche 0.4%
+Other 7.3% [17100000.0] Tornado Cash 0.3%
+Lending 4.2% [15668627.0] Aave v2 0.3%
+Other 7.3% [15324237.3] Clearinghouse 0.3%
+Bridge 8.1% [15309580.2] L1StandardBridge 0.3%
+DEX 5.8% [7911946.9] Uniswap v2 0.2%
+Other 7.3% [7429840.3] StrategyDsrDai 0.1%
+Bridge 8.1% [5782486.2] Pool 0.1%
+Treasury 2.9% [5302646.9] Safev1.0.0 0.1%
+DEX 5.8% [5221767.6] Balancer v2 0.1%
