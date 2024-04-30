@@ -1,52 +1,52 @@
-Crypto-Loans 42.5% [2244323769.7] Assets 100%
-Stablecoins 37.7% [1992565883.1] Assets 100%
-Real-World Assets 19.8% [1046237277.2] Assets 100%
+Crypto-Loans 42.6% [2245193625.1] Assets 100%
+Stablecoins 37.5% [1977038783.4] Assets 100%
+Real-World Assets 19.9% [1046237277.2] Assets 100%
 Others assets 0.0% [48533.1] Assets 100%
-Assets 100% [5283175463.1] Liabilities 100%
-Liabilities 100% [3212657018.5] DAI 60.8%
-Liabilities 100% [2020720596.0] DSR 38.2%
-Liabilities 100% [49797848.6] Surplus Buffer 0.9%
-DAI 60.8% [2192248293.0] EOA 68.7%
-DAI 60.8% [315893260.1] Bridge 7.7%
-DAI 60.8% [242345765.6] DEX 5.4%
-DAI 60.8% [186193612.9] Lending 5.5%
-DAI 60.8% [153029141.4] Other 6.1%
-DAI 60.8% [87616815.1] CeFi 2.6%
-DAI 60.8% [19401945.0] Treasury 2.8%
-DSR 38.2% [1435276904.4] EOA 68.7%
-DSR 38.2% [170141396.6] Other 6.1%
-DSR 38.2% [127300369.2] Treasury 2.8%
-DSR 38.2% [102895993.2] Lending 5.5%
-DSR 38.2% [90888060.4] Bridge 7.7%
-DSR 38.2% [50220949.3] CeFi 2.6%
-DSR 38.2% [43892341.2] DEX 5.4%
-Other 6.1% [213653790.5] GnosisSafev1.3.0 4.0%
-Bridge 7.7% [186566754.5] Polygon 3.5%
-DEX 5.4% [100655660.8] Pair 1.9%
-Lending 5.5% [99538854.7] VariableDebtToken 1.9%
-Treasury 2.8% [95170292.1] Safev1.1.1 1.8%
-Bridge 7.7% [80119634.1] Gnosis Chain 1.5%
-Lending 5.5% [71131687.1] AToken 1.3%
-Lending 5.5% [64801215.9] Morpho 1.2%
-DEX 5.4% [60458558.3] Uniswap v3 1.1%
-CeFi 2.6% [53430344.9] Binance 1.0%
-Bridge 7.7% [52637340.4] Arbitrum 1.0%
-DEX 5.4% [50942362.5] CurveStableSwapNG 1.0%
-CeFi 2.6% [47230042.2] Nexo 0.9%
-Treasury 2.8% [45697929.2] OlympusTreasury 0.9%
-DEX 5.4% [45177718.0] Curve.fi: DAI/USDC/USDT Pool 0.9%
-Other 6.1% [35997979.9] PulseChainOmnibridge 0.7%
-Lending 5.5% [33928094.4] Compound 0.6%
-Bridge 7.7% [31561318.6] Optimism 0.6%
-Bridge 7.7% [19285421.5] Avalanche 0.4%
+Assets 100% [5268518218.8] Liabilities 100%
+Liabilities 100% [3197998961.5] DAI 60.7%
+Liabilities 100% [2020990176.6] DSR 38.4%
+Liabilities 100% [49529080.7] Surplus Buffer 0.9%
+DAI 60.7% [2186614705.3] EOA 68.8%
+DAI 60.7% [316166905.6] Bridge 7.7%
+DAI 60.7% [239764068.8] DEX 5.4%
+DAI 60.7% [194156409.7] Lending 5.6%
+DAI 60.7% [151373741.5] Other 6.1%
+DAI 60.7% [88957144.2] CeFi 2.6%
+DAI 60.7% [19393488.8] Treasury 2.8%
+DSR 38.4% [1437317460.2] EOA 68.8%
+DSR 38.4% [169638540.7] Other 6.1%
+DSR 38.4% [127315034.1] Treasury 2.8%
+DSR 38.4% [102465629.2] Lending 5.6%
+DSR 38.4% [91227160.7] Bridge 7.7%
+DSR 38.4% [50220949.3] CeFi 2.6%
+DSR 38.4% [42700820.9] DEX 5.4%
+Other 6.1% [212091687.0] GnosisSafev1.3.0 4.0%
+Bridge 7.7% [186752189.7] Polygon 3.5%
+DEX 5.4% [99315732.2] Pair 1.9%
+Lending 5.6% [95361296.7] VariableDebtToken 1.8%
+Treasury 2.8% [95174173.7] Safev1.1.1 1.8%
+Lending 5.6% [83103547.2] AToken 1.6%
+Bridge 7.7% [80397046.2] Gnosis Chain 1.5%
+Lending 5.6% [63891082.3] Morpho 1.2%
+DEX 5.4% [57810456.4] Uniswap v3 1.1%
+CeFi 2.6% [53516025.1] Binance 1.0%
+Bridge 7.7% [52705610.7] Arbitrum 1.0%
+DEX 5.4% [49510110.6] CurveStableSwapNG 0.9%
+CeFi 2.6% [47013262.1] Nexo 0.9%
+DEX 5.4% [46907947.1] Curve.fi: DAI/USDC/USDT Pool 0.9%
+Treasury 2.8% [45700329.4] OlympusTreasury 0.9%
+Other 6.1% [35720236.7] PulseChainOmnibridge 0.7%
+Lending 5.6% [33894331.1] Compound 0.6%
+Bridge 7.7% [31631633.3] Optimism 0.6%
+Bridge 7.7% [19295415.5] Avalanche 0.4%
 Other 6.1% [17200000.0] Tornado Cash 0.3%
-Other 6.1% [16589604.7] Clearinghouse 0.3%
-Bridge 7.7% [14952304.0] L1StandardBridge 0.3%
-Lending 5.5% [13384722.1] Aave v2 0.3%
-DEX 5.4% [8229847.9] Uniswap v2 0.2%
+Other 6.1% [16215658.5] Clearinghouse 0.3%
+Bridge 7.7% [14966116.7] L1StandardBridge 0.3%
+Lending 5.6% [14195317.4] Aave v2 0.3%
+DEX 5.4% [8186839.1] Uniswap v2 0.2%
 Other 6.1% [7429840.3] StrategyDsrDai 0.1%
-Bridge 7.7% [6158622.3] Pool 0.1%
-CeFi 2.6% [6047809.9] Kraken 0.1%
-DEX 5.4% [5445755.6] Balancer v2 0.1%
-CeFi 2.6% [5351267.6] Crypto.com 0.1%
+CeFi 2.6% [6834160.6] Kraken 0.1%
+Bridge 7.7% [6149995.8] Pool 0.1%
+DEX 5.4% [5505847.7] Balancer v2 0.1%
+CeFi 2.6% [5350322.1] Crypto.com 0.1%
 Treasury 2.8% [5302670.6] Safev1.0.0 0.1%
