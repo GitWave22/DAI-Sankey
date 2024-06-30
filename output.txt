@@ -1,54 +1,55 @@
-Crypto-Loans 51.0% [2617757746.8] Assets 100%
-Real-World Assets 26.3% [1353558420.0] Assets 100%
-Stablecoins 22.7% [1166496320.6] Assets 100%
+Crypto-Loans 51.3% [2617120385.5] Assets 100%
+Real-World Assets 26.5% [1352224947.9] Assets 100%
+Stablecoins 22.1% [1129014760.2] Assets 100%
 Others assets 0.0% [48533.1] Assets 100%
-Assets 100% [5137861020.5] Liabilities 100%
-Liabilities 100% [3214231022.1] DAI 62.6%
-Liabilities 100% [1871888424.5] DSR 36.4%
-Liabilities 100% [51741573.9] Surplus Buffer 1.0%
-DAI 62.6% [2227744672.4] EOA 69.1%
-DAI 62.6% [306084746.6] Bridge 7.7%
-DAI 62.6% [212343733.7] DEX 4.9%
-DAI 62.6% [211116812.3] Lending 6.3%
-DAI 62.6% [137314979.8] Other 5.5%
-DAI 62.6% [82635499.4] CeFi 2.0%
-DAI 62.6% [14710777.1] Treasury 2.7%
-DAI 62.6% [686678.3] Yield Farm 0.4%
-DSR 36.4% [1321973565.5] EOA 69.1%
-DSR 36.4% [143784465.7] Other 5.5%
-DSR 36.4% [126570282.8] Treasury 2.7%
-DSR 36.4% [110471584.2] Lending 6.3%
-DSR 36.4% [91154783.1] Bridge 7.7%
-DSR 36.4% [39834810.6] DEX 4.9%
-DSR 36.4% [19522475.0] Yield Farm 0.4%
+Assets 100% [5098408626.7] Liabilities 100%
+Liabilities 100% [3193436682.1] DAI 62.6%
+Liabilities 100% [1853279288.0] DSR 36.4%
+Liabilities 100% [51692656.6] Surplus Buffer 1.0%
+DAI 62.6% [2226568705.4] EOA 69.2%
+DAI 62.6% [306533186.2] Bridge 7.8%
+DAI 62.6% [228174674.1] Lending 6.6%
+DAI 62.6% [209024907.2] DEX 4.9%
+DAI 62.6% [134791331.4] Other 5.5%
+DAI 62.6% [82578544.7] CeFi 2.0%
+DAI 62.6% [14711216.1] Treasury 2.8%
+DAI 62.6% [686576.6] Yield Farm 0.4%
+DSR 36.4% [1303703045.5] EOA 69.2%
+DSR 36.4% [144388908.1] Other 5.5%
+DSR 36.4% [126570282.8] Treasury 2.8%
+DSR 36.4% [110420876.6] Lending 6.6%
+DSR 36.4% [91154783.1] Bridge 7.8%
+DSR 36.4% [39033967.9] DEX 4.9%
+DSR 36.4% [19430966.3] Yield Farm 0.4%
 DSR 36.4% [18576457.7] CeFi 2.0%
-Bridge 7.7% [190050114.9] Polygon 3.7%
-Other 5.5% [189881246.5] GnosisSafev1.3.0 3.7%
-Lending 6.3% [116445908.5] Morpho 2.3%
-DEX 4.9% [91471940.6] Pair 1.8%
-Treasury 2.7% [91274859.7] Safev1.1.1 1.8%
-Bridge 7.7% [81407357.9] Gnosis Chain 1.6%
-Lending 6.3% [71287501.4] VariableDebtToken 1.4%
-DEX 4.9% [57484991.2] Uniswap v3 1.1%
-Lending 6.3% [50403018.4] AToken 1.0%
-DEX 4.9% [49149596.1] CurveStableSwapNG 1.0%
-Bridge 7.7% [47011916.1] Arbitrum 0.9%
-CeFi 2.0% [44558215.4] Binance 0.9%
-Treasury 2.7% [42240203.8] OlympusTreasury 0.8%
-Lending 6.3% [32535150.5] Compound 0.6%
-Bridge 7.7% [30669783.6] Optimism 0.6%
-Other 5.5% [29419325.3] PulseChainOmnibridge 0.6%
-DEX 4.9% [28008909.3] Curve.fi: DAI/USDC/USDT Pool 0.5%
-Lending 6.3% [19463876.7] Pendle SY-SDAI 0.4%
-Bridge 7.7% [17860129.9] Avalanche 0.3%
+Bridge 7.8% [190246064.5] Polygon 3.7%
+Other 5.5% [189998364.5] GnosisSafev1.3.0 3.7%
+Lending 6.6% [121171576.6] Morpho 2.4%
+Treasury 2.8% [91275304.3] Safev1.1.1 1.8%
+DEX 4.9% [89530464.0] Pair 1.8%
+Bridge 7.8% [81485708.1] Gnosis Chain 1.6%
+Lending 6.6% [70276236.6] VariableDebtToken 1.4%
+Lending 6.6% [59178508.2] AToken 1.2%
+DEX 4.9% [55606776.0] Uniswap v3 1.1%
+DEX 4.9% [47650304.7] CurveStableSwapNG 0.9%
+Bridge 7.8% [47262025.8] Arbitrum 0.9%
+CeFi 2.0% [44649334.0] Binance 0.9%
+Treasury 2.8% [42240203.8] OlympusTreasury 0.8%
+Lending 6.6% [32527749.9] Compound 0.6%
+Bridge 7.8% [30669907.6] Optimism 0.6%
+Other 5.5% [29119405.1] PulseChainOmnibridge 0.6%
+DEX 4.9% [28822276.3] Curve.fi: DAI/USDC/USDT Pool 0.6%
+Lending 6.6% [19469010.0] Pendle SY-SDAI 0.4%
+Bridge 7.8% [17860204.9] Avalanche 0.4%
 Other 5.5% [17300000.0] Tornado Cash 0.3%
-CeFi 2.0% [16877333.1] Nexo 0.3%
-Lending 6.3% [16316371.4] Bond Protocol 0.3%
+CeFi 2.0% [16907185.1] Nexo 0.3%
+Lending 6.6% [16316468.8] Bond Protocol 0.3%
 Yield Farm 0.4% [15020182.2] Karak Finance 0.3%
-Bridge 7.7% [13767775.4] L1StandardBridge 0.3%
-CeFi 2.0% [10265507.5] Kraken 0.2%
-Lending 6.3% [9102977.7] Aave v2 0.2%
-DEX 4.9% [8165359.7] Uniswap v2 0.2%
+Bridge 7.8% [13766707.5] L1StandardBridge 0.3%
+Lending 6.6% [13572327.6] Aave v2 0.3%
+CeFi 2.0% [9679822.3] Kraken 0.2%
+DEX 4.9% [8161334.6] Uniswap v2 0.2%
 Other 5.5% [7429840.3] StrategyDsrDai 0.1%
-Other 5.5% [6564233.9] HubPool 0.1%
-CeFi 2.0% [5746752.6] Crypto.com 0.1%
+Other 5.5% [6336067.5] HubPool 0.1%
+CeFi 2.0% [5735107.2] Crypto.com 0.1%
+DEX 4.9% [5123536.4] SushiSwap 0.1%
